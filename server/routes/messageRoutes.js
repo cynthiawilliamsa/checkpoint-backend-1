@@ -1,11 +1,8 @@
 let express =  require("express");
 const router = express.Router();
-let {list,show,create,update,remove} = require( "../controllers/messageControllers");
+let {list,create} = require( "../controllers/messageController");
 
-router.get("/state/messages", list);
-router.get("/state/messages/:id", show);
-router.post("/state/messages", create);
-router.put("/comments/:id", update);
-router.delete("/comments/:id", remove);
+router.get("/messages", list);
+router.post("/messages", create);
 
 module.exports =  router;

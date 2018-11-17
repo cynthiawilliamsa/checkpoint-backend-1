@@ -1,21 +1,23 @@
+//server connects to routes: connects to controllers: connects to models
+
 let express = require("express");
 //Add body parser middleware to express
 let bodyParser = require('body-parser');
-let DateTimeRoutes  = require("./routes/DateTimeRoutes");
-// let CommentRoutes  = require("./routes/CommentRoutes");
-// let VehicleRoutes = require("./routes/VehicleRoutes");
-// let ProductRoutes = require("./routes/ProductRoutes");
+const messageRoutes = require('./routes/messageRoutes');
+// const orderRoutes = require('./routes/orderRoutes');
+// const taskRoutes = require('./routes/taskRoutes');
+
 const app = express();
 app.use(bodyParser.json());
 app.use(express.static('public'));
-app.use(DateTimeRoutes);
-// app.use(CommentRoutes);
-// app.use(VehicleRoutes);
-// app.use(ProductRoutes);
+app.use(messageRoutes);
+// app.use(orderRoutes);
+// app.use(taskRoutes);
+
 const fs = require('fs');
-// let mongoose = require("mongoose");
-// mongoose.Promise = global.Promise;
-// mongoose.connect("mongodb://cynthiawilliamsa:w010149a@ds163156.mlab.com:63156/checkpoint-backend-1");
+let mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://cynthiawilliamsa:w010149a@ds163156.mlab.com:63156/checkpoint-backend-1");
 
 fs.readFile('server/data.csv', 'utf8',(err, data)=>{
   if (err) throw err;
