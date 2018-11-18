@@ -4,15 +4,15 @@ let express = require("express");
 //Add body parser middleware to express
 let bodyParser = require('body-parser');
 const messageRoutes = require('./routes/messageRoutes');
-// const orderRoutes = require('./routes/orderRoutes');
-// const taskRoutes = require('./routes/taskRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const taskRoutes = require('./routes/taskRoutes');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(messageRoutes);
-// app.use(orderRoutes);
-// app.use(taskRoutes);
+app.use(orderRoutes);
+app.use(taskRoutes);
 
 const fs = require('fs');
 let mongoose = require("mongoose");
