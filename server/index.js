@@ -15,6 +15,7 @@ app.use(orderRoutes);
 app.use(taskRoutes);
 
 const fs = require('fs');
+const fetch = require("node-fetch");
 let mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://cynthiawilliamsa:w010149a@ds163156.mlab.com:63156/checkpoint-backend-1");
@@ -24,6 +25,10 @@ fs.readFile('server/data.csv', 'utf8',(err, data)=>{
   const sentData = data.split('\n');
 
   const numArray = sentData[1].split(',');
+    app.get('/dateTime', (req, res)=>{
+      let d = new Date();
+      res.send(d);
+      });
     app.get("/newComments", (req, res)=>{
       console.log(numArray[0])
       res.send(numArray[0]);
@@ -40,6 +45,14 @@ fs.readFile('server/data.csv', 'utf8',(err, data)=>{
       res.send(numArray[3]);
     });
 });
+  app.get('/foxes', (req, res)=>{
+    fetch('https://randomfox.ca/floof')
+    .then(res=>res.json())
+    .then(json=>{
+        console.log(json)
+        res.json(json.image)
+    });
+  });
 
 //* Make your app listen to port 3001
 app.listen(3001, (err) => {
